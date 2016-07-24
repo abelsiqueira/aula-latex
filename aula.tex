@@ -1,0 +1,299 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{geometry}
+\usepackage{amsmath,amsthm,amsfonts}
+\usepackage{graphicx}
+%%% BibLaTeX
+%\usepackage[style=numeric]{biblatex}
+\usepackage[style=ieee]{biblatex}
+%\usepackage[style=alphabetic]{biblatex}
+%%% \usepackage[style=abnt]{biblatex} % Exige passos adicionais
+\addbibresource{aula.bib}
+%%% End
+
+\author{Abel Soares Siqueira}
+\title{Tutorial de \LaTeX\ para Software Carpentry}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+  \bf
+\begin{minipage}{0.7\textwidth}
+ATENÇÃO: Este texto foi feito como referência a um tutorial e não é
+auto-suficiente.
+\end{minipage}
+\end{center}
+
+\section{Introdução}
+
+O \LaTeX\ é uma linguagem de marcação feito para textos matemáticos.
+Ele funciona a partir de um texto com códigos e comandos, que após
+compilação vira um arquivo (PDF, PS, outros) bem formatado.
+
+A extensão tradicional de arquivos de \LaTeX\ é o .tex. Esse .tex é um
+arquivo de texto normal, apenas salvo com a extensão .tex. Ele pode ser
+aberto em qualquer editor de texto.
+Naturalmente, um editor de texto voltado para o \LaTeX\ é melhor.
+Alguns já foram sugeridos antes.
+
+As linguagens de marcação, normalmente, são \emph{WYSINWYG - What you
+see is not what you get}, isto é, o que você escreve no arquivo .tex e
+o que é gerado no pdf são coisas diferentes.
+Os processadores de texto não são assim. O Word, Libreoffice e
+similares geram arquivos que, quando impressos, devem gerar aquilo que
+se está vendo.
+Uma vantagem disso, é que você tem mais controle. A desvantagem é que
+você tem (muito) mais trabalho.
+
+O \LaTeX\ é a principal linguagem para textos matemáticos. A maior
+parte dos períodicos e livros dos últimos 10 anos na área usam apenas o
+\LaTeX. Os motivos são simples: O texto fica bonito, e é muito mais
+fácil de inserir os objetos importantes do texto: equações.
+
+Essa facilidade tem uma contrapartida: você precisa ``programar'' - na
+verdade precisa falar da maneira correta para que o texto possa ser
+compilado.
+
+\section{Começando}
+
+Caso não tenha feita, abra o arquivo .tex também.
+
+Antes de começar a escrever o seu texto, você precisa entender alguns
+elementos:
+
+\begin{itemize}
+  \item Cabeçalho: Você precisa de um cabeçalho indicando
+  \begin{itemize}
+    \item Que tipo de documento: artigo, livro, etc.;
+    \item Que pacotes chamar: idioma, símbolos, gráficos, etc.;
+    \item Autor, Título, Data, etc.;
+    \item Definições.
+  \end{itemize}
+  \item Tudo escrito tem que estar entre \verb+\begin{document}+ e
+\verb+\end{document}+.
+\end{itemize}
+
+O texto básico no \LaTeX\ não tem formatação:
+
+Este
+texto
+não diferencia
+  espaços
+     ou
+quebra      de     linhas.
+
+Não existe negrito, tamanho de letra, ou a fonte no arquivo .tex.
+Tudo isso {\bf pode} ser {\LARGE criado} no PDF através de comandos no
+\LaTeX.
+
+Outra coisa que você já deve ter percebido é que o \LaTeX\ que decide o
+que vai aonde. Ao escrever o texto não precisamos nos preocupar com
+numerações, mudança de página, comprimento da linha (recomendo manter
+as linhas no tex curtas, por causa do {\tt git}, no entanto), etc.
+Por um lado isso é bom porque você foca apenas no desenvolvimento do
+texto. Por outro é ruim porque quando você realmente precisa mudar
+algo, dá um certo trabalho. Veremos situações assim em breve.
+
+\section{Ambientes matemáticos}
+
+Fórmulas e símbolos matemáticos exigem alguns pacotes para funcionar.
+Algumas coisas específicas requerem outros pacotes, quando existem (a
+maior parte existe).
+Um exemplo simples é $x^2$. Esse uso é dentro de uma linha.
+Você pode quebrar uma linha só
+$x^3 - x^2$
+que não faz diferença.
+
+Note ainda o espaçamento $x + 2x + x^2$ e
+$x+2 x+x ^ 2$.
+
+Quando sozinho numa linha fica assim
+
+$x^2 + x$
+
+Estranho, não?
+Para isso existe o próximo comando
+
+$$ x^4 - x^3 $$
+
+ou
+
+\[
+  4x(1-x)
+\]
+
+Onde colocar esses delimitadores é estilo pessoal.
+
+Com esses dois ambientes já dá pra fazer muita coisa. É preciso
+lembrar, ou saber buscar alguns comandos para realmente ter todo o
+potencial do \LaTeX, mas quando pegamos o jeito, fica fácil.
+
+\[
+  \xi(t) = \sum_{n = 0}^{\infty} \alpha_i
+    \frac{\mbox{d}^nf}{\mbox{dx}^n}(a)(t-a)^n
+\]
+
+\[
+  \mathcal{L}^{-1}\{F(s)G(s)\}(t) =
+  f*g = \int_0^t f(\tau) g(t-\tau) \mbox{d}\tau
+\]
+
+\[
+  [f(g(x))]' = \lim_{h\rightarrow 0} \frac{f(g(x+h))-f(g(x))}{h}
+\]
+
+\[
+  x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]
+
+\[
+  z_{k+1} = z_k - [\nabla^2 f(z_k)]^{-1}\nabla f(z_k)
+\]
+
+\[
+  f(x) = \left\{
+  \begin{array}{ll}
+    \dfrac{\sin(t)}{t}, & t \neq 0 \\
+    1, & t = 0
+  \end{array}\right.
+\]
+
+\[
+  A = \left[\begin{array}{cc}
+    a & b \\ c & d
+\end{array}
+  \right]
+  \Rightarrow
+  A^{-1} = \frac{1}{ad-bc} \left[\begin{array}{cc}
+      d & -b \\ -c & a
+  \end{array}
+    \right]
+\]
+
+\[ \alpha + \beta + \gamma = \zeta + \theta + \delta \]
+
+\[ A + B + \Gamma = Z + \Theta + \Delta \]
+
+\[ \phi = \varphi, \epsilon = \varepsilon \]
+
+Um problema desses ambientes é que eles não tem numeração, o que é
+bastante necessário para artigos, teses e afins.
+
+\begin{equation}
+  f(x) = x^3
+\end{equation}
+
+Para usar, no entanto é preciso dar nomes
+\begin{equation}
+  \Delta = b^2 - 4ac \label{def.delta}
+\end{equation}
+
+A definição de $\Delta$ está na equação \eqref{def.delta}, ou
+(\ref{def.delta}).
+
+Outra coisa necessária é quando queremos desenvolver uma conta e
+continuar na linha sequinte.
+\begin{align}
+  \lim_{h\rightarrow 0} \frac{(x+h)^2-x^2}{h}
+  & = \lim_{h\rightarrow 0} \frac{2xh + h^2}{h} \\
+  & = \lim_{h\rightarrow 0} 2x + h \\
+  & = 2x.
+\end{align}
+Caso queira as quebras de linha, mas não a numeração, faça
+\begin{align*}
+  ax^2 + bx + c & = a\bigg(x^2 + \frac{b}{a}x\bigg) + c \\
+  & = a\bigg(x + \frac{b}{2a}\bigg)^2 -a\frac{b^2}{4a^2} + c \\
+  & = a\bigg(x + \frac{b}{2a}\bigg)^2 - \frac{b^2 - 4ac}{4a}
+\end{align*}
+Se quiser numeração apenas em alguns faça
+\begin{align}
+  f(x^* + d) & = f(x^*) + \nabla f(x^*)^Td + \frac{1}{2}d^T \nabla^2
+f(x^*)d \nonumber \\
+& = f(x^*) + \frac{1}{2}d^TAd \nonumber \\
+& > f(x^*), \qquad \forall d \neq 0.
+\end{align}
+
+Claro, existem outras possibilidades.
+
+\section{Figuras e Tabelas}
+
+Tabela:
+\begin{tabular}{r|cl}
+  A & tabela & segue \\
+  essa & formatação & que é \\ \hline
+  bastante & & específica \\ \hline
+\end{tabular}
+
+Mas se quisermos mais informações além da tabela, usamos o ambiente
+{\tt table}, como mostrado na Tabela \ref{tab:exemplo}.
+\begin{table}[ht] % here top
+  \centering
+\begin{tabular}{|c|c|} \hline
+  A & B \\ \hline
+  C & D \\ \hline
+\end{tabular}
+\caption{Exemplo de tabela com table }
+\label{tab:exemplo}
+\end{table}
+Note que a tabela vai pra onde bem quer. {\tt [ht]} é apenas uma
+indicação de preferência.
+
+Figura:
+\includegraphics[scale=0.3]{ufpr.jpg}
+
+Ambiente da figura mostrado na Figura \ref{fig:exemplo}.
+\begin{figure}[!ht] % ! quer dizer por favor.
+  \centering
+  \includegraphics[width=0.5\textwidth]{ufpr.jpg}
+  \caption{Exemplo de figura com figure}
+  \label{fig:exemplo}
+\end{figure}
+As mesmas considerações valem para a figura.
+
+Ambos ambientes são ditos flutuantes, pois a posição deles vai depender
+do resto do texto. Em geral, podemos deixar o \LaTeX\ decidir onde é
+melhor colocar os flutuantes. Existem pacotes que forçam o
+posicionamento, no entanto.
+\section{Bibliografia}
+
+
+A bibliografia no \LaTeX\ é bastante útil. Você precisa definir uma
+lista de nomes e códigos, algo do tipo
+\begin{verbatim}
+\begin{thebibliography}{9}
+  \bibitem{bib:exemplo}
+    Fulano de Tal,
+    \emph{Nome do Livro do Fulano},
+    Outras informações, com o formato e ordem que você queira.
+\end{thebibliography}
+\end{verbatim}
+Que vai gerar algo parecido com
+\begin{center}
+  \fbox{
+\begin{minipage}{0.9\textwidth}
+Fulano de Tal, \emph{Nome do Livro do Fulano},
+Outras informações, com o formato e ordem que você queira.
+\end{minipage}
+}
+\end{center}
+Depois basta usar um comando do tipo \verb+\cite{bib:exemplo}+.
+
+No entanto, essa maravilha é trabalhosa. Digamos que você escreve
+cinquenta daquelas linhas para seu TCC/Tese seguindo as normas da ABNT.
+Mas daí você vai publicar num períodico que segue outras normas.
+Então você precisa reescrever esse texto todo.
+Para evitar isso, podemos usar o BibTeX.
+
+Veja o arquivo \verb+aula.bib+. \cite{bib:fulano-artigo} é um artigo,
+e \cite{bib:fulano-livro}. Note os artigos omitidos e não citados.
+
+\nocite{bib:sem-cit}
+%%% Biblatex
+\printbibliography
+%%% End
+
+\end{document}
