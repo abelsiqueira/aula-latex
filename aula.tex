@@ -13,6 +13,9 @@
 \addbibresource{aula.bib}
 %%% End
 
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{lema}[teorema]{Lema}
+
 \author{Abel Soares Siqueira}
 \title{Tutorial de \LaTeX\ para Software Carpentry}
 \date{}
@@ -258,8 +261,61 @@ Ambos ambientes são ditos flutuantes, pois a posição deles vai depender
 do resto do texto. Em geral, podemos deixar o \LaTeX\ decidir onde é
 melhor colocar os flutuantes. Existem pacotes que forçam o
 posicionamento, no entanto.
-\section{Bibliografia}
 
+\section{Teoremas}
+
+Um outro ambiente é o de teoremas, que foi criado no início.
+\begin{teorema}\label{teo:primeiro}
+Algo assim.
+\end{teorema}
+O Teorema \ref{teo:primeiro} foi criado com a numeração da seção.
+O Lema foi criado como um tipo teorema.
+\begin{lema}
+Segue a numeração do teorema.
+\end{lema}
+\begin{proof}
+A demonstração usa o pacote \verb+amsthm+. Note o quadradinho no
+fim.
+\end{proof}
+Caso queira outro tipo de quadradinho, você pode redefiní-lo.
+
+\renewcommand{\qedsymbol}{\rule{0.7em}{0.7em}}
+
+\begin{lema}
+Outro lema.
+\end{lema}
+\begin{proof}
+Outra prova.
+\end{proof}
+
+\section{Antes do fim}
+
+Como faço para ...
+
+A maneira mais simples é digitar no Google
+\begin{center}
+  \fbox{
+\begin{minipage}{0.9\textwidth}
+  latex o que você quer, em inglês
+\end{minipage}
+}
+\end{center}
+
+O Google deve retornar alguns dos sites principais de conteúdo:
+\cite{bib:wikibooks, bib:stacktex, bib:sharelatex},
+além de outras várias fontes. Caso não ache, tente reformular a questão.
+
+\section{O que não foi dito}
+
+\begin{itemize}
+  \item Slides (use o Beamer);
+  \item Posters;
+  \item Imagens nativamente (veja o TikZ);
+  \item Visualização de dados (veja o PgfPlots);
+  \item E muito mais.
+\end{itemize}
+
+\section{Bibliografia}
 
 A bibliografia no \LaTeX\ é bastante útil. Você precisa definir uma
 lista de nomes e códigos, algo do tipo
@@ -292,6 +348,9 @@ Veja o arquivo \verb+aula.bib+. \cite{bib:fulano-artigo} é um artigo,
 e \cite{bib:fulano-livro}. Note os artigos omitidos e não citados.
 
 \nocite{bib:sem-cit}
+
+
+\nocite{bib:reginaldo}
 %%% Biblatex
 \printbibliography
 %%% End
