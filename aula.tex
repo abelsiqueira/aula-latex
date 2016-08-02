@@ -5,6 +5,7 @@
 \usepackage{geometry}
 \usepackage{amsmath,amsthm,amsfonts}
 \usepackage{graphicx}
+\usepackage{aula}
 %%% BibLaTeX
 %\usepackage[style=numeric]{biblatex}
 \usepackage[style=ieee]{biblatex}
@@ -330,6 +331,21 @@ Outra prova.
   \yk{k+j} = \sum_{i = 0}^j\yk{k+i}
 \]
 
+\section{Arquivos .sty}
+
+\[
+  \modulo{x} + \modulo{y}
+\]
+
+\[
+  \prodint{v}{w}
+\]
+
+$$ v = \vetordois{2}{3} $$
+$$ w = \vetordois{2}{3}{4} \qquad \mbox{ não}$$
+$$ w = \vetortres{2}{3}{4} $$
+$$ A = \matrizdoispordois{a}{b}{c}{d} $$
+
 \section{O que não foi dito}
 
 \begin{itemize}
@@ -379,5 +395,16 @@ e \cite{bib:fulano-livro}. Note os artigos omitidos e não citados.
 %%% Biblatex
 \printbibliography
 %%% End
+
+\section*{Exercícios}
+
+\begin{itemize}
+  \item Escolha um livro ou artigo online e acrescente ao .bib.
+    Faça uma citação dessa nova entrada.
+  \item Crie um comando novo onde eu passo $x$ e $a$ e ele cria
+    $ \lim_{x \rightarrow a} $
+  \item Crie um comando novo a sua escolha e adicione num arquivo novo .sty.
+    Faça uso desse comando no .tex.
+\end{itemize}
 
 \end{document}
